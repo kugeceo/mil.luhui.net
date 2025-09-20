@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>军用电源技术安全性与可靠性保障体系研究报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+        // Tailwind配置
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F3460',    // 深蓝主色
+                        secondary: '#1A1A2E',  // 深紫辅助色
+                        accent: '#E94560',     // 红色强调色
+                        light: '#EAEAEA',      // 浅色文本
+                        dark: '#16213E',       // 深色背景
+                        'tech-gray': '#2C3E50' // 技术灰
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace']
+                    },
+                    boxShadow: {
+                        'tech': '0 4px 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(15, 52, 96, 0.5)',
+                        'card': '0 2px 15px rgba(0, 0, 0, 0.2)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .bg-glass {
+                background: rgba(30, 41, 59, 0.8);
+                backdrop-filter: blur(8px);
+            }
+            .border-tech {
+                border: 1px solid rgba(15, 52, 96, 0.5);
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .content-auto {
+                content-visibility: auto;
+            }
+        }
+    </style>
+    <!-- 引入字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="bg-dark text-light min-h-screen flex flex-col">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-50 bg-glass border-b border-tech transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-microchip text-accent text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-white">军用电源技术研究</h1>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-toggle" class="md:hidden text-light focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+            
+            <!-- 桌面端导航 -->
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#overview" class="text-light hover:text-accent transition-colors duration-200 text-sm font-medium">概述</a>
+                <a href="#design" class="text-light hover:text-accent transition-colors duration-200 text-sm font-medium">设计技术</a>
+                <a href="#production" class="text-light hover:text-accent transition-colors duration-200 text-sm font-medium">生产质控</a>
+                <a href="#testing" class="text-light hover:text-accent transition-colors duration-200 text-sm font-medium">测试验证</a>
+                <a href="#maintenance" class="text-light hover:text-accent transition-colors duration-200 text-sm font-medium">使用维护</a>
+                <a href="#trends" class="text-light hover:text-accent transition-colors duration-200 text-sm font-medium">发展趋势</a>
+            </nav>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-secondary border-b border-tech">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#overview" class="text-light hover:text-accent transition-colors duration-200 py-2 text-sm font-medium">概述</a>
+                <a href="#design" class="text-light hover:text-accent transition-colors duration-200 py-2 text-sm font-medium">设计技术</a>
+                <a href="#production" class="text-light hover:text-accent transition-colors duration-200 py-2 text-sm font-medium">生产质控</a>
+                <a href="#testing" class="text-light hover:text-accent transition-colors duration-200 py-2 text-sm font-medium">测试验证</a>
+                <a href="#maintenance" class="text-light hover:text-accent transition-colors duration-200 py-2 text-sm font-medium">使用维护</a>
+                <a href="#trends" class="text-light hover:text-accent transition-colors duration-200 py-2 text-sm font-medium">发展趋势</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- 报告标题区 -->
+        <section class="mb-12 text-center">
+            <h1 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-white mb-4 text-shadow">军用电源技术安全性与可靠性保障体系研究报告</h1>
+            <div class="w-32 h-1 bg-accent mx-auto mb-6"></div>
+            <p class="text-gray-300 max-w-3xl mx-auto text-sm md:text-base">
+                本报告系统分析军用电源系统的安全性与可靠性保障技术，涵盖设计、生产、测试、维护全生命周期，
+                为军事装备电源系统的研发与应用提供技术支撑
+            </p>
+        </section>
+
+        <!-- 目录导航卡片 -->
+        <section class="mb-16 bg-tech-gray/30 rounded-lg p-6 border border-tech shadow-tech">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <i class="fa fa-list-ul text-accent mr-2"></i>目录导航
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="#overview" class="flex items-center p-3 bg-secondary/50 rounded-md hover:bg-primary/30 transition-colors duration-200 border border-tech/30">
+                    <i class="fa fa-info-circle text-accent mr-3 text-lg"></i>
+                    <span>一、军用电源系统安全性与可靠性概述</span>
+                </a>
+                <a href="#design" class="flex items-center p-3 bg-secondary/50 rounded-md hover:bg-primary/30 transition-colors duration-200 border border-tech/30">
+                    <i class="fa fa-pencil-square-o text-accent mr-3 text-lg"></i>
+                    <span>二、军用电源系统安全可靠性设计技术</span>
+                </a>
+                <a href="#production" class="flex items-center p-3 bg-secondary/50 rounded-md hover:bg-primary/30 transition-colors duration-200 border border-tech/30">
+                    <i class="fa fa-industry text-accent mr-3 text-lg"></i>
+                    <span>三、军用电源系统生产与质量控制</span>
+                </a>
+                <a href="#testing" class="flex items-center p-3 bg-secondary/50 rounded-md hover:bg-primary/30 transition-colors duration-200 border border-tech/30">
+                    <i class="fa fa-flask text-accent mr-3 text-lg"></i>
+                    <span>四、军用电源系统测试与验证技术</span>
+                </a>
+                <a href="#maintenance" class="flex items-center p-3 bg-secondary/50 rounded-md hover:bg-primary/30 transition-colors duration-200 border border-tech/30">
+                    <i class="fa fa-wrench text-accent mr-3 text-lg"></i>
+                    <span>五、军用电源系统使用与维护技术</span>
+                </a>
+                <a href="#trends" class="flex items-center p-3 bg-secondary/50 rounded-md hover:bg-primary/30 transition-colors duration-200 border border-tech/30">
+                    <i class="fa fa-line-chart text-accent mr-3 text-lg"></i>
+                    <span>六、军用电源安全性与可靠性技术发展趋势</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- 第一部分：概述 -->
+        <section id="overview" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                    <span class="font-bold">1</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">军用电源系统安全性与可靠性概述</h2>
+            </div>
+            <div class="pl-13 border-l-2 border-primary/50">
+                <!-- 1.1 特殊性与挑战 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">1.1 军用电源系统的特殊性与挑战</h3>
+                    <p class="mb-4 text-gray-300">
+                        军用电源系统与民用电源相比，具有显著的特殊性和更高的技术要求。首先，军用电源需要在极端环境条件下工作，
+                        包括-55℃至+85℃的温度范围、高湿度、强振动和冲击等恶劣环境。其次，军用电源必须具备抗电磁干扰(EMI)和电磁脉冲(EMP)的能力，
+                        以保证在复杂电磁环境中的稳定工作。
+                    </p>
+                    
+                    <!-- 挑战列表 -->
+                    <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 mb-4">
+                        <h4 class="font-medium mb-3 flex items-center">
+                            <i class="fa fa-exclamation-triangle text-accent mr-2"></i>当前军用电源面临的主要挑战
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                <span><strong class="text-white">极端环境适应性挑战</strong>：军事行动可能在沙漠、极地、深海等极端环境中进行，电源系统需在这些环境下保持稳定性能。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                <span><strong class="text-white">电磁兼容性挑战</strong>：现代战场充斥着各种电磁信号，电源系统必须具备优异的电磁兼容性，避免干扰其他设备或被其他设备干扰。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                <span><strong class="text-white">可靠性与安全性平衡挑战</strong>：在提高电源系统效率和功率密度的同时，必须确保系统的可靠性和安全性，防止故障导致的严重后果。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                <span><strong class="text-white">智能化与自主化挑战</strong>：随着军事装备智能化程度提高，电源系统需要具备智能管理和自主诊断能力，同时确保这些功能不会引入新的安全风险。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 1.2 核心概念与指标 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">1.2 安全性与可靠性的核心概念与指标</h3>
+                    <p class="mb-4 text-gray-300">
+                        军用电源系统的安全性和可靠性是两个相互关联但又有区别的概念。安全性主要关注电源系统在各种条件下不发生危险或造成伤害的能力，
+                        而可靠性则关注电源系统在规定条件下和规定时间内完成规定功能的能力。
+                    </p>
+
+                    <!-- 指标对比卡片 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- 安全性指标 -->
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 shadow-card">
+                            <h4 class="font-medium mb-3 flex items-center text-white">
+                                <i class="fa fa-shield text-accent mr-2"></i>安全性指标
+                            </h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                                    <span><strong>安全工作范围</strong>：电源系统能够安全运行的电压、电流、温度等参数范围</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                                    <span><strong>故障安全机制</strong>：系统出现故障时的安全保护能力</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                                    <span><strong>电磁安全</strong>：防止电磁辐射或电磁脉冲导致的安全风险</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 可靠性指标 -->
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 shadow-card">
+                            <h4 class="font-medium mb-3 flex items-center text-white">
+                                <i class="fa fa-clock-o text-accent mr-2"></i>可靠性指标
+                            </h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                                    <span><strong>平均故障间隔时间(MTBF)</strong>：系统两次故障之间的平均时间</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                                    <span><strong>平均修复时间(MTTR)</strong>：系统发生故障后恢复正常所需的平均时间</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                                    <span><strong>可靠度</strong>：系统在特定时间内无故障运行的概率</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                                    <span><strong>任务可靠度</strong>：系统在特定任务期间成功完成功能的概率</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MTBF对比图表 -->
+                    <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 mb-4">
+                        <h4 class="font-medium mb-4 text-center text-white">军用电源与民用电源MTBF对比（小时）</h4>
+                        <div class="h-64">
+                            <canvas id="mtbfChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-400 mt-3">
+                            现代军用电源系统的平均无故障时间(MTBF)已突破10万小时，比民用电源高出一个数量级以上
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 1.3 战略意义 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-accent">1.3 军用电源安全性与可靠性的战略意义</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-secondary/30 rounded-lg p-4 border border-tech/30 hover:shadow-tech transition-shadow duration-300">
+                            <div class="w-10 h-10 rounded-full bg-primary/50 flex items-center justify-center mb-3">
+                                <i class="fa fa-bolt text-accent"></i>
+                            </div>
+                            <h4 class="font-medium mb-2 text-white">保障作战效能</h4>
+                            <p class="text-sm text-gray-300">
+                                可靠的电源系统是武器装备发挥最佳性能的基础。例如，某型预警机电源系统的可靠性直接影响其预警和指挥控制能力。
+                            </p>
+                        </div>
+                        <div class="bg-secondary/30 rounded-lg p-4 border border-tech/30 hover:shadow-tech transition-shadow duration-300">
+                            <div class="w-10 h-10 rounded-full bg-primary/50 flex items-center justify-center mb-3">
+                                <i class="fa fa-shield text-accent"></i>
+                            </div>
+                            <h4 class="font-medium mb-2 text-white">降低作战风险</h4>
+                            <p class="text-sm text-gray-300">
+                                电源系统故障可能导致装备失效，甚至造成人员伤亡。提高安全性可有效降低此类风险。
+                            </p>
+                        </div>
+                        <div class="bg-secondary/30 rounded-lg p-4 border border-tech/30 hover:shadow-tech transition-shadow duration-300">
+                            <div class="w-10 h-10 rounded-full bg-primary/50 flex items-center justify-center mb-3">
+                                <i class="fa fa-truck text-accent"></i>
+                            </div>
+                            <h4 class="font-medium mb-2 text-white">减少后勤负担</h4>
+                            <p class="text-sm text-gray-300">
+                                高可靠性电源系统可以减少维护需求和备件库存，降低后勤保障压力。
+                            </p>
+                        </div>
+                        <div class="bg-secondary/30 rounded-lg p-4 border border-tech/30 hover:shadow-tech transition-shadow duration-300">
+                            <div class="w-10 h-10 rounded-full bg-primary/50 flex items-center justify-center mb-3">
+                                <i class="fa fa-rocket text-accent"></i>
+                            </div>
+                            <h4 class="font-medium mb-2 text-white">支持新型武器发展</h4>
+                            <p class="text-sm text-gray-300">
+                                高能激光、电磁炮等新型武器系统对电源提出了更高要求，安全性与可靠性是这些系统实用化的关键。
+                            </p>
+                        </div>
+                        <div class="bg-secondary/30 rounded-lg p-4 border border-tech/30 hover:shadow-tech transition-shadow duration-300">
+                            <div class="w-10 h-10 rounded-full bg-primary/50 flex items-center justify-center mb-3">
+                                <i class="fa fa-refresh text-accent"></i>
+                            </div>
+                            <h4 class="font-medium mb-2 text-white">提升全生命周期价值</h4>
+                            <p class="text-sm text-gray-300">
+                                通过提高可靠性和安全性，延长装备使用寿命，降低全生命周期成本。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二部分：设计技术 -->
+        <section id="design" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                    <span class="font-bold">2</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">军用电源系统安全可靠性设计技术</h2>
+            </div>
+            <div class="pl-13 border-l-2 border-primary/50">
+                <!-- 2.1 电路拓扑与系统架构 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">2.1 电路拓扑与系统架构设计</h3>
+                    
+                    <!-- 2.1.1 冗余与容错设计 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-random text-accent mr-2"></i>2.1.1 冗余与容错设计
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">N+1冗余架构</strong>：采用"N+1冗余架构"，例如某雷达电源系统采用5只500W DC/DC变换器并联输出，其中一只作为冗余备份，确保个别模块故障不影响整体供电。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">双总线供电结构</strong>：重要系统采用双总线供电结构，两条总线相互独立，可互为备份，提高系统的容错能力。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">故障隔离与自动切换</strong>：当检测到故障时，系统能够自动隔离故障部分，并切换到备用模块，确保供电连续性。某型军用电源的切换时间可控制在200微秒以内。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">分布式电源架构</strong>：采用分布式电源架构，将电源分散到各个负载附近，降低单点故障风险，同时提高系统的可扩展性和灵活性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2.1.2 模块化设计 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-th text-accent mr-2"></i>2.1.2 模块化设计
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">标准化模块</strong>：采用标准化模块设计，便于更换和维护，提高系统的可维修性。例如，某型相控阵雷达电源分系统采用24个标准化电源模块，便于故障定位和更换。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">热插拔技术</strong>：支持带电热插拔，无需系统断电即可更换模块，提高了系统的可用性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">功能模块化</strong>：将不同功能（如AC/DC变换、DC/DC变换、滤波、保护等）设计为独立模块，便于独立优化和升级。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">模块化冗余</strong>：每个功能模块都可采用冗余设计，提高系统的整体可靠性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2.1.3 智能控制与保护电路 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-cogs text-accent mr-2"></i>2.1.3 智能控制与保护电路
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">多重保护机制</strong>：包括过压保护、过流保护、过热保护、短路保护等，确保电源在异常情况下能够自我保护。例如，某型火炮训练电源配备了完善的过流保护、过压保护等安全措施。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">故障诊断与定位</strong>：通过智能控制电路实现故障的自动诊断和定位，提高维修效率。某型预警机电源系统的故障误报率已降低至0.3%。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">自适应控制策略</strong>：根据负载变化自动调整工作模式，优化系统性能，提高可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">软启动与软关断</strong>：采用软启动和软关断技术，避免电压电流冲击，保护电源和负载设备。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.2 材料选择与工艺技术 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">2.2 材料选择与工艺技术</h3>
+                    
+                    <!-- 2.2.1 军用级元器件选型 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-microchip text-accent mr-2"></i>2.2.1 军用级元器件选型
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">军用标准元器件</strong>：优先选用符合MIL-STD-883等军用标准的元器件，如耐高温的陶瓷电容器、抗振动的军规连接器等。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">宽禁带半导体器件</strong>：采用碳化硅(SiC)和氮化镓(GaN)等宽禁带半导体器件，提高系统效率和可靠性。SiC功率器件的热导率是硅的三倍以上，能够在更高温度下工作，显著提高系统的可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">高可靠性电容</strong>：采用钽电容、陶瓷电容等高可靠性电容，避免使用电解电容等高故障率元件。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">抗辐射元器件</strong>：对于空间应用或核环境应用的电源，采用抗辐射加固的元器件，如抗辐射的集成电路和传感器。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2.2.2 先进封装与制造工艺 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-cube text-accent mr-2"></i>2.2.2 先进封装与制造工艺
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">密封灌胶工艺</strong>：采用"密封灌胶"工艺（如用环氧树脂灌封电源模块），隔绝潮气、盐雾对内部电路的侵蚀。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">多层PCB设计</strong>：采用多层PCB设计，提高系统的集成度和抗干扰能力。中国电科集团开发的军用多级电磁拓扑防护体系已实现8层PCB板级集成。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">表面贴装技术(SMT)</strong>：采用表面贴装技术，减少焊点数量，提高机械强度和可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">无铅焊接工艺</strong>：采用无铅回流焊工艺，并遵循IPC-A-610D中的军用级别要求，提高焊接质量和可靠性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2.2.3 散热与热管理技术 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-thermometer-half text-accent mr-2"></i>2.2.3 散热与热管理技术
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">热管和散热片材料</strong>：采用先进的导热材料（如铜、石墨烯等）制成的热管或散热片，提升电源在高负载条件下的散热能力。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">热仿真优化</strong>：通过热仿真软件优化散热路径，确保电源在极端温度下仍能稳定工作。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">温控风扇</strong>：采用温控风扇，根据温度自动调节风扇转速，提高散热效率并延长风扇寿命。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">相变材料</strong>：在关键发热元件周围使用相变材料，吸收和存储热量，平衡温度波动，提高系统的热稳定性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.3 抗干扰与电磁兼容性设计 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">2.3 抗干扰与电磁兼容性设计</h3>
+                    
+                    <!-- 电磁兼容性测试数据图表 -->
+                    <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 mb-6">
+                        <h4 class="font-medium mb-4 text-center text-white">军用电源EMI抑制指标提升趋势</h4>
+                        <div class="h-64">
+                            <canvas id="emiChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-400 mt-3">
+                            现代战场环境推动美国军方将电源模块的EMI抑制指标从传统80dB提升至100dB量级
+                        </p>
+                    </div>
+
+                    <!-- 2.3.1 电磁屏蔽设计 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-shield text-accent mr-2"></i>2.3.1 电磁屏蔽设计
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">全金属屏蔽外壳</strong>：采用全金属屏蔽外壳，如镀锌钢板，有效屏蔽内部电路产生的电磁辐射，同时防止外部电磁干扰进入。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">三维叠层屏蔽结构</strong>：采用三维叠层屏蔽结构设计，可将电源系统辐射泄漏控制在10μV/m以下，满足严格的电磁兼容性要求。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">屏蔽通风设计</strong>：在需要通风的地方采用屏蔽通风设计，如蜂窝状通风孔，既保证通风效果，又能有效屏蔽电磁辐射。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2.3.2 滤波与接地设计 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-filter text-accent mr-2"></i>2.3.2 滤波与接地设计
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">多级滤波电路</strong>：采用多级滤波电路，包括共模电感和差模电容组合，有效抑制传导干扰。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">输入输出滤波器</strong>：在电源输入和输出端安装高性能滤波器，抑制高频噪声和干扰。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">星型接地</strong>：采用星型接地设计，避免地环路产生，减少接地噪声和干扰。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">接地平面设计</strong>：在PCB设计中使用大面积接地平面，降低接地阻抗，提高系统的抗干扰能力。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2.3.3 抗电磁脉冲(EMP)设计 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-bolt text-accent mr-2"></i>2.3.3 抗电磁脉冲(EMP)设计
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">多层PCB电磁拓扑防护</strong>：中国电科集团开发的军用多级电磁拓扑防护体系已实现8层PCB板级集成，在舰载雷达供电系统中实测群延时波动控制在±0.15ns以内。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">浪涌抑制器</strong>：在电源输入端安装浪涌抑制器，如金属氧化物压敏电阻(MOV)或气体放电管(GDT)，抑制高能量电磁脉冲。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">屏蔽与接地结合</strong>：将电磁屏蔽与良好的接地系统结合，形成完整的电磁脉冲防护体系。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">分布式防护策略</strong>：采用分布式防护策略，在不同位置设置防护措施，形成多层次防护体系。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.4 智能化与自主化设计 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-accent">2.4 智能化与自主化设计</h3>
+                    
+                    <!-- 自主修复能力对比 -->
+                    <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 mb-6">
+                        <h4 class="font-medium mb-4 text-center text-white">军用电源自主修复能力对比</h4>
+                        <div class="h-64">
+                            <canvas id="selfRepairChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-400 mt-3">
+                            不同厂商军用电源系统在沙漠环境测试中的自主修复能力对比
+                        </p>
+                    </div>
+
+                    <!-- 2.4.1 智能监控与诊断系统 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-eye text-accent mr-2"></i>2.4.1 智能监控与诊断系统
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">实时监控系统</strong>：配备先进的智能化管理系统，实时监控电源的工作状态、温度及电压电流输出等重要参数。例如，某型火炮训练电源配备了智能化管理系统，能实时监控电源的工作状态。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">多传感器数据融合</strong>：整合来自不同传感器和设备的异构数据，如温度、湿度、振动等，提高故障检测的全面性和准确性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">故障预测与健康管理(PHM)</strong>：基于人工智能的故障预测与健康管理系统已在某型预警机电源系统实现应用，故障误报率降低至0.3%。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2.4.2 人工智能在电源安全中的应用 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-brain text-accent mr-2"></i>2.4.2 人工智能在电源安全中的应用
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">机器学习算法</strong>：应用机器学习算法，如支持向量机(SVM)、随机森林等，对电源系统的运行数据进行分析，识别潜在故障模式。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">深度学习模型</strong>：采用深度学习模型，如卷积神经网络(CNN)和循环神经网络(RNN)，对电源系统的异常进行检测和预测。某型军用电源系统通过深度学习算法，对瞬态异常波动的识别精度已提升至纳秒级。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">专家系统</strong>：基于专家系统和规则引擎，构建基于行为的故障诊断模型，快速定位潜在故障点。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2.4.3 自主修复与自适应能力 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-refresh text-accent mr-2"></i>2.4.3 自主修复与自适应能力
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">自主修复机制</strong>：以色列埃尔比特系统公司验证的自主修复机制，在沙漠环境测试中成功实现87%的突发故障现场处置。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">自适应控制策略</strong>：德国博世集团开发的自主决策架构，通过强化学习实现动态负载分配，在模拟复杂电磁环境测试中电源效率提升19%。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">故障自愈能力</strong>：雷神技术公司为F35战机开发的智能配电系统，可实时监控128个供电节点状态，故障自愈时间缩短至200微秒。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">在线重构能力</strong>：系统能够根据当前状态和环境条件，自动调整其结构和参数，保持最佳性能和可靠性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三部分：生产与质量控制 -->
+        <section id="production" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                    <span class="font-bold">3</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">军用电源系统生产与质量控制</h2>
+            </div>
+            <div class="pl-13 border-l-2 border-primary/50">
+                <!-- 3.1 军用级生产环境与工艺控制 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">3.1 军用级生产环境与工艺控制</h3>
+                    
+                    <!-- 3.1.1 洁净生产环境 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-certificate text-accent mr-2"></i>3.1.1 洁净生产环境
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">洁净车间要求</strong>：生产环境需满足"洁净车间"要求（如Class 10000级，每立方米空气中≥0.5μm的尘埃数≤10000个），避免灰尘导致电路短路。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">防静电措施</strong>：在生产过程中采用严格的防静电措施，如工人穿防静电服、工作台接接地线等，避免静电击穿军用级芯片（部分芯片静电敏感电压仅50V）。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">温湿度控制</strong>：对生产环境的温度和湿度进行精确控制，确保生产过程的稳定性和一致性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 3.1.2 军用标准生产工艺 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-cogs text-accent mr-2"></i>3.1.2 军用标准生产工艺
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">军用焊接标准</strong>：焊接工艺采用"无铅回流焊"，并遵循IPC-A-610D（电子组件可接受性标准）中的军用级别（Class 3）要求。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">精确的温度控制</strong>：在焊接、灌封等关键工艺中，采用精确的温度控制系统，确保工艺参数的稳定性和一致性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">自动化生产</strong>：采用自动化生产设备，减少人为因素的影响，提高产品的一致性和可靠性。伟仕电源固安工厂的自动化生产线和电磁兼容测试中心，为其规模化生产提供了保障。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 3.1.3 生产过程监控与追溯 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-barcode text-accent mr-2"></i>3.1.3 生产过程监控与追溯
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">全流程监控</strong>：对生产过程的关键参数进行实时监控和记录，确保工艺执行的一致性和可追溯性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">条形码与RFID追溯</strong>：采用条形码或RFID技术，对原材料、半成品和成品进行全程追溯，确保产品质量的可追溯性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">关键工序验证</strong>：对关键工序（如焊接、测试等）进行严格验证，确保每一步骤都符合质量要求。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3.2 元器件筛选与质量控制 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">3.2 元器件筛选与质量控制</h3>
+                    
+                    <!-- 3.2.1 元器件入厂检验 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-check-square-o text-accent mr-2"></i>3.2.1 元器件入厂检验
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">严格的入厂检验</strong>：对每批次元器件进行"入厂检验"（IQC），例如用X射线检测仪检查芯片焊接质量、用耐压测试仪检测电容绝缘性能。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">军用标准测试</strong>：按照MIL-STD-883等军用标准对元器件进行测试，确保其性能符合军用要求。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">环境应力筛选</strong>：对关键元器件进行环境应力筛选，如温度循环、振动等，提前发现潜在缺陷。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 3.2.2 关键元器件可靠性评估 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-line-chart text-accent mr-2"></i>3.2.2 关键元器件可靠性评估
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">加速寿命测试</strong>：对关键元器件进行加速寿命测试，评估其在极端条件下的可靠性和寿命。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">可靠性预测模型</strong>：应用可靠性预测模型，如MIL-HDBK-217F，对元器件的可靠性进行预测和评估。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">降额设计</strong>：在电路设计中采用降额设计，确保元器件在低于其额定值的条件下工作，提高可靠性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 3.2.3 元器件老化与筛选 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-fire text-accent mr-2"></i>3.2.3 元器件老化与筛选
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">高温老化</strong>：对关键元器件进行高温老化处理，加速早期失效的发生，筛选出可靠性高的元器件。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">功率老化</strong>：对功率器件进行功率老化测试，确保其在额定功率下的可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">振动筛选</strong>：对元器件进行振动测试，筛选出机械性能良好的元器件。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">筛选参数优化</strong>：根据历史数据和失效分析结果，不断优化筛选参数和方法，提高筛选效率和效果。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3.3 质量控制体系与认证 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">3.3 质量控制体系与认证</h3>
+                    
+                    <!-- 认证体系图表 -->
+                    <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 mb-6">
+                        <h4 class="font-medium mb-4 text-center text-white">军用电源质量认证体系覆盖情况</h4>
+                        <div class="h-64">
+                            <canvas id="certificationChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-400 mt-3">
+                            伟仕电源作为北京市瞪羚企业及双高新技术认证单位，已通过多项国际认证
+                        </p>
+                    </div>
+
+                    <!-- 3.3.1 质量管理体系认证 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-certificate text-accent mr-2"></i>3.3.1 质量管理体系认证
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">ISO 9001认证</strong>：通过ISO 9001质量管理体系认证，建立标准化的质量管理流程。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">GJB 9001C认证</strong>：通过GJB 9001C（军用质量管理体系要求）认证，满足军用产品的特殊质量要求。作为北京市瞪羚企业及双高新技术认证单位，伟仕电源已通过ISO9001、GJB9001C等多项国际认证。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">AS9100认证</strong>：对于航空航天用电源，通过AS9100航空航天质量管理体系认证，满足航空航天领域的特殊要求。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 3.3.2 军用标准认证 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-shield text-accent mr-2"></i>3.3.2 军用标准认证
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">环境适应性认证</strong>：按照GJB 150A（军用装备环境试验方法）进行环境适应性认证，确保产品在各种环境条件下的可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">电磁兼容性认证</strong>：按照GJB 151B（军用设备电磁兼容性要求）进行电磁兼容性认证，确保产品在电磁环境中的兼容性和抗干扰能力。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">可靠性鉴定试验</strong>：进行可靠性鉴定试验，验证产品的可靠性是否满足设计要求。中国军用电源行业严格执行GJB9001C标准，环境试验涵盖55℃至125℃温度冲击、15g随机振动及盐雾腐蚀96小时等严苛条件，产品平均无故障时间（MTBF）突破10万小时。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 3.3.3 质量持续改进 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-refresh text-accent mr-2"></i>3.3.3 质量持续改进
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">质量问题分析与改进</strong>：对生产过程中出现的质量问题进行深入分析，采取有效的纠正和预防措施。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">数据分析与应用</strong>：收集和分析质量数据，识别质量问题的根本原因，为持续改进提供依据。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">供应商质量改进</strong>：与供应商合作，共同提高原材料和元器件的质量，从源头保障产品质量。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3.4 出厂测试与质量把关 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-accent">3.4 出厂测试与质量把关</h3>
+                    
+                    <!-- 3.4.1 全面性能测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-tachometer text-accent mr-2"></i>3.4.1 全面性能测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">100%全项目测试</strong>：每台电源出厂前需完成"100%全项目测试"，而非抽样检测，确保每一台产品都符合质量要求。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">基本性能测试</strong>：包括输出电压精度（如±1%）、负载调整率（如≤2%）、效率（如≥85%）等基本性能指标的测试。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">环境适应性测试</strong>：进行高低温循环（-55℃~+85℃，循环10次）、湿热测试（40℃，相对湿度95%，持续96小时）等环境适应性测试。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 3.4.2 极端条件测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-bolt text-accent mr-2"></i>3.4.2 极端条件测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">高低温测试</strong>：将电源放入高低温箱，在-55℃（低温）、+85℃（高温）下分别满负载运行4小时，期间实时监测输出电压、电流是否稳定，无中断、无保护动作。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">盐雾测试</strong>：按MIL-STD-810标准，将电源放入盐雾箱（5%氯化钠溶液，温度35℃），连续喷雾48小时，测试后检查外壳无锈蚀、内部电路无短路，性能正常。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">振动与冲击测试</strong>：在振动台上按10~2000Hz、10g加速度振动2小时，再用冲击台按500g加速度、1ms脉宽冲击3次，测试后电源需能正常启动并输出。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 3.4.3 性能冗余度测试 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-exclamation-circle text-accent mr-2"></i>3.4.3 性能冗余度测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">极限负载测试</strong>：在超过额定负载120%的条件下进行测试，验证电源的过载能力和保护功能。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">极限电压测试</strong>：在超出额定输入电压范围（如±20%）的条件下进行测试，验证电源的输入电压适应能力和保护功能。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">极限温度测试</strong>：在超出正常工作温度范围的条件下进行测试，验证电源的温度适应能力和可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">长时间运行测试</strong>：在额定负载下进行长时间（如1000小时）连续运行测试，验证电源的长期稳定性和可靠性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第四部分：测试与验证技术 -->
+        <section id="testing" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                    <span class="font-bold">4</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">军用电源系统测试与验证技术</h2>
+            </div>
+            <div class="pl-13 border-l-2 border-primary/50">
+                <!-- 4.1 环境适应性测试 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">4.1 环境适应性测试</h3>
+                    
+                    <!-- 温度测试条件图表 -->
+                    <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 mb-6">
+                        <h4 class="font-medium mb-4 text-center text-white">军用电源环境适应性测试条件</h4>
+                        <div class="h-64">
+                            <canvas id="environmentTestChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-400 mt-3">
+                            军用电源各项环境适应性测试的严苛条件要求
+                        </p>
+                    </div>
+
+                    <!-- 4.1.1 温度测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-thermometer-three-quarters text-accent mr-2"></i>4.1.1 温度测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">工作温度范围测试</strong>：测试电源在规定工作温度范围内（通常为-55℃~+85℃）的性能，确保其在极端温度下的稳定性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">温度冲击测试</strong>：进行温度冲击测试，模拟环境温度的急剧变化，测试电源的适应能力。测试条件通常为-55℃~+85℃温度冲击，循环10次。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">温度循环测试</strong>：进行温度循环测试，模拟电源在实际使用中的温度变化，测试其长期可靠性。测试条件通常为-40℃~+70℃，循环100次。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4.1.2 湿度与盐雾测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-tint text-accent mr-2"></i>4.1.2 湿度与盐雾测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">恒定湿热测试</strong>：进行恒定湿热测试，通常在40℃、95%相对湿度的条件下持续96小时，测试电源的防潮性能。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">交变湿热测试</strong>：进行交变湿热测试，模拟环境湿度的周期性变化，测试电源的适应能力。测试条件通常为25℃~60℃，相对湿度95%，循环10次。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">盐雾测试</strong>：按MIL-STD-810标准，将电源放入盐雾箱（5%氯化钠溶液，温度35℃），连续喷雾48小时，测试后检查外壳无锈蚀、内部电路无短路，性能正常。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4.1.3 机械环境测试 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-cogs text-accent mr-2"></i>4.1.3 机械环境测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">振动测试</strong>：在振动台上按10~2000Hz、10g加速度振动2小时，测试电源在振动环境下的稳定性和可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">冲击测试</strong>：用冲击台按500g加速度、1ms脉宽冲击3次，测试电源在冲击环境下的抗冲击能力和可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">碰撞测试</strong>：进行碰撞测试，模拟运输或使用过程中的碰撞环境，测试电源的抗碰撞能力。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">离心测试</strong>：对机载或舰载电源进行离心测试，模拟高g值环境，测试电源的结构强度和可靠性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4.2 电气性能测试 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">4.2 电气性能测试</h3>
+                    
+                    <!-- 4.2.1 稳态性能测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-balance-scale text-accent mr-2"></i>4.2.1 稳态性能测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">输出电压精度测试</strong>：测试电源在额定负载下的输出电压精度，通常要求误差在±1%以内。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">负载调整率测试</strong>：测试电源在负载变化时的输出电压稳定性，通常要求负载调整率≤2%。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">源电压调整率测试</strong>：测试电源在输入电压变化时的输出电压稳定性，通常要求源电压调整率≤1%。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">效率测试</strong>：测试电源在不同负载条件下的效率，通常要求效率≥85%。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4.2.2 动态性能测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-line-chart text-accent mr-2"></i>4.2.2 动态性能测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">负载瞬态响应测试</strong>：测试电源在负载突变时的瞬态响应特性，包括电压过冲、恢复时间等指标。MIL-STD-704F标准规定多电飞机供电系统暂态过程中电压最高值不超过330V，且时间不超过20ms，电压最低值不低于200V，且时间不超过10ms。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">启动特性测试</strong>：测试电源的启动特性，包括启动时间、启动过冲等指标。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">关机特性测试</strong>：测试电源的关机特性，包括关机时间、关机过冲等指标。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4.2.3 保护功能测试 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-shield text-accent mr-2"></i>4.2.3 保护功能测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">过压保护测试</strong>：测试电源的过压保护功能，确保当输出电压超过设定值时，保护功能能够及时动作，防止负载设备损坏。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">过流保护测试</strong>：测试电源的过流保护功能，确保当输出电流超过设定值时，保护功能能够及时动作，防止电源和负载设备损坏。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">短路保护测试</strong>：测试电源的短路保护功能，确保当输出短路时，保护功能能够及时动作，防止电源损坏。某型军用电源的短路保护能够支持长期短路自恢复。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">过热保护测试</strong>：测试电源的过热保护功能，确保当温度超过设定值时，保护功能能够及时动作，防止电源因过热而损坏。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4.3 电磁兼容性测试 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">4.3 电磁兼容性测试</h3>
+                    
+                    <!-- 电磁干扰故障占比图表 -->
+                    <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 mb-6">
+                        <h4 class="font-medium mb-4 text-center text-white">现代战场电子设备故障原因分析</h4>
+                        <div class="h-64">
+                            <canvas id="emiFaultChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-400 mt-3">
+                            现代战场环境中电子设备故障案例中约60%与电磁干扰直接相关
+                        </p>
+                    </div>
+
+                    <!-- 4.3.1 传导发射测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-plug text-accent mr-2"></i>4.3.1 传导发射测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">电源端子传导发射测试</strong>：测试电源通过电源线向外辐射的传导干扰，确保其符合军用标准要求。GJB 151B标准规定了军用设备的传导发射限值。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">信号/控制线传导发射测试</strong>：测试电源通过信号和控制线向外辐射的传导干扰，确保其符合军用标准要求。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">杂散发射测试</strong>：测试电源在非工作频段的杂散发射，确保其不对其他电子设备产生干扰。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4.3.2 辐射发射测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-wifi text-accent mr-2"></i>4.3.2 辐射发射测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">电场辐射发射测试</strong>：测试电源通过空间辐射的电场干扰，确保其符合军用标准要求。GJB 151B标准规定了军用设备的辐射发射限值。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">磁场辐射发射测试</strong>：测试电源通过空间辐射的磁场干扰，确保其符合军用标准要求。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">近场辐射测试</strong>：测试电源在近距离内的辐射特性，确保其不对邻近设备产生干扰。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4.3.3 电磁敏感度测试 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-bolt text-accent mr-2"></i>4.3.3 电磁敏感度测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">传导敏感度测试</strong>：测试电源对通过电源线、信号/控制线等传导途径进入的干扰信号的敏感度，确保其在干扰环境中的稳定性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">辐射敏感度测试</strong>：测试电源对空间辐射干扰的敏感度，确保其在强电磁环境中的稳定性和可靠性。现代战场环境中电子设备故障案例中约60%与电磁干扰直接相关，直接推动美国军方将电源模块的EMI抑制指标从传统80dB提升至100dB量级。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">静电放电敏感度测试</strong>：测试电源对静电放电的敏感度，确保其在静电环境中的稳定性和可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">浪涌敏感度测试</strong>：测试电源对浪涌干扰的敏感度，确保其在浪涌环境中的稳定性和可靠性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4.4 可靠性测试与评估 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-accent">4.4 可靠性测试与评估</h3>
+                    
+                    <!-- 4.4.1 可靠性增长测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-line-chart text-accent mr-2"></i>4.4.1 可靠性增长测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">试验-分析-改进循环</strong>：通过"试验-分析-改进"循环，不断发现和解决设计、工艺等方面的问题，提高产品的可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">加速寿命测试</strong>：进行加速寿命测试，在短时间内获取产品的可靠性数据，为可靠性增长提供依据。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">故障模式与影响分析(FMEA)</strong>：进行故障模式与影响分析，识别潜在的故障模式及其影响，采取预防措施，提高产品的可靠性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4.4.2 寿命测试 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-clock-o text-accent mr-2"></i>4.4.2 寿命测试
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">长期运行测试</strong>：进行长期运行测试，在额定负载下连续运行数千小时，评估电源的使用寿命和可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">加速寿命测试</strong>：进行加速寿命测试，在高于正常工作条件的环境下运行，加速故障的发生，评估电源的寿命和可靠性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">累积损伤模型</strong>：建立累积损伤模型，评估电源在长期使用过程中的性能退化和寿命。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4.4.3 可靠性评估与验证 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-check-circle text-accent mr-2"></i>4.4.3 可靠性评估与验证
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">可靠性指标评估</strong>：评估电源的平均故障间隔时间(MTBF)、平均修复时间(MTTR)等可靠性指标，确保其符合设计要求。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">可靠性验证试验</strong>：进行可靠性验证试验，验证电源的可靠性是否满足规定要求。中国军用电源行业产品平均无故障时间（MTBF）突破10万小时。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">可靠性预计</strong>：基于元器件的可靠性数据和系统的结构，预计电源的可靠性，为设计和改进提供依据。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">统计分析方法</strong>：应用统计分析方法，对测试数据进行分析，评估电源的可靠性水平和置信度。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第五部分：使用与维护技术 -->
+        <section id="maintenance" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                    <span class="font-bold">5</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">军用电源系统使用与维护技术</h2>
+            </div>
+            <div class="pl-13 border-l-2 border-primary/50">
+                <!-- 5.1 电源系统使用规范 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">5.1 电源系统使用规范</h3>
+                    
+                    <!-- 5.1.1 正确操作流程 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-list-ol text-accent mr-2"></i>5.1.1 正确操作流程
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">详细的操作手册</strong>：制定详细的操作手册，明确电源系统的正确操作步骤和注意事项，避免因误操作导致的故障和安全事故。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">开机与关机顺序</strong>：规定严格的开机与关机顺序，确保系统的安全启动和关闭。例如，某型雷达电源系统的开机顺序必须遵循先低压后高压、先控制后功率的原则。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">负载管理规范</strong>：制定负载管理规范，确保电源系统在额定负载范围内工作，避免过载运行导致的故障和安全风险。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 5.1.2 环境管理要求 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-leaf text-accent mr-2"></i>5.1.2 环境管理要求
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">温度管理</strong>：确保电源系统在规定的温度范围内工作，避免高温或低温环境影响其性能和寿命。军用电源通常要求工作温度范围覆盖-55℃~+85℃。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">湿度管理</strong>：控制电源系统工作环境的湿度，避免潮湿环境导致的绝缘下降和腐蚀问题。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">洁净度管理</strong>：保持电源系统工作环境的洁净度，避免灰尘和异物进入电源内部，影响散热和绝缘性能。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">通风管理</strong>：确保电源系统有良好的通风条件，防止热量积聚，影响系统性能和寿命。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 5.1.3 安全使用规范 -->
+                    <div>
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-shield text-accent mr-2"></i>5.1.3 安全使用规范
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">电气安全规范</strong>：制定电气安全规范，确保电源系统的正确接地和绝缘，防止触电和短路事故。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">防误操作措施</strong>：采取防误操作措施，如加锁、设置警告标识等，防止误操作导致的安全事故。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">应急预案</strong>：制定应急预案，明确在电源系统出现异常或故障时的应急处理措施，确保人员和设备安全。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">安全培训</strong>：对操作人员进行安全培训，提高安全意识和应急处理能力。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5.2 电源系统维护策略 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent">5.2 电源系统维护策略</h3>
+                    
+                    <!-- 维护策略效果对比图表 -->
+                    <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30 mb-6">
+                        <h4 class="font-medium mb-4 text-center text-white">不同维护策略效果对比</h4>
+                        <div class="h-64">
+                            <canvas id="maintenanceStrategyChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-400 mt-3">
+                            预测性维护相比传统预防性维护在维护成本和系统可用性方面的优势
+                        </p>
+                    </div>
+
+                    <!-- 5.2.1 预防性维护 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-check-square-o text-accent mr-2"></i>5.2.1 预防性维护
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">定期检查与维护</strong>：制定定期检查与维护计划，按照规定的周期对电源系统进行检查和维护，预防故障的发生。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">清洁与紧固</strong>：定期对电源系统进行清洁，清除灰尘和异物，检查并紧固连接部件，确保系统的良好接触和散热。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">性能测试</strong>：定期进行性能测试，检查电源的输出电压、电流、纹波等参数是否正常，及时发现潜在问题。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">备件管理</strong>：建立备件管理系统，确保关键备件的充足供应，缩短维修时间，提高系统的可用性。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 5.2.2 预测性维护 -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-3 text-white flex items-center">
+                            <i class="fa fa-line-chart text-accent mr-2"></i>5.2.2 预测性维护
+                        </h4>
+                        <div class="bg-secondary/30 rounded-lg p-5 border border-tech/30">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="text-white">状态监测系统</strong>：建立状态监测系统，实时监测电源系统的运行状态和关键参数，为预测性维护提供数据支持。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span><strong class="
