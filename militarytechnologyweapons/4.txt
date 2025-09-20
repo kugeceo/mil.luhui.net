@@ -104,7 +104,8 @@
 如果你需要更具体的落地方案，比如某类装备（如无人机、雷达）电源的专项设计规范，或者军用电源测试的详细流程表，我可以帮你整理一份**军用电源安全性与可靠性实施细则文档**，包含具体标准编号、测试步骤和设计案例，方便直接参考使用。
 
 
-http://mil.luhui.net/militarytechnologyweapons
+
+![军用电源技术安全性与可靠性保障体系研究报告网页版](http://mil.luhui.net/militarytechnologyweapons)
 
 
 
